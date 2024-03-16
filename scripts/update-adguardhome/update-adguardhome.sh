@@ -69,7 +69,7 @@ create_persistance_script() {
     # It should be executed after every reboot
     # Author: Admon
     # Date: 2024-03-06
-    if [ -f /etc/init.d/adguardhome ] 
+    if [ -f /etc/init.d/adguardhome ]
     then
         sed -i '/procd_set_param command \/usr\/bin\/AdGuardHome/ s/--no-check-update //' "/etc/init.d/adguardhome"
     else

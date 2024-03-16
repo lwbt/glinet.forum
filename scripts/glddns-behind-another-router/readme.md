@@ -41,7 +41,7 @@ sh /usr/bin/glddns-behind-another-router.sh --cron
 ## Notes
 
 - Ensure that you have sufficient permissions to execute the script.
-- 
+-
 
 ## Reverting
 

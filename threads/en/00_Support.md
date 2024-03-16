@@ -24,11 +24,11 @@ I am also just a normal forum member, not a staff member. However, since I know 
 
 ### Instructions & Tutorials
 
-[for firmware 4.x :link:](https://docs.gl-inet.com/router/en/4/tutorials/) | [for firmware 3.x :link:](https://docs.gl-inet.com/router/en/3/tutorials/) 
+[for firmware 4.x :link:](https://docs.gl-inet.com/router/en/4/tutorials/) | [for firmware 3.x :link:](https://docs.gl-inet.com/router/en/3/tutorials/)
 
 ### Common problems & their solutions
 
-[for firmware 4.x :link:](https://docs.gl-inet.com/router/en/4/faq/) | [for firmware 3.x :link:](https://docs.gl-inet.com/router/en/3/) 
+[for firmware 4.x :link:](https://docs.gl-inet.com/router/en/4/faq/) | [for firmware 3.x :link:](https://docs.gl-inet.com/router/en/3/)
 
 ---
 
@@ -67,7 +67,7 @@ Nothing works anymore? The web interface is not accessible or you have installed
 
 Don't panic. In most cases, the router is not broken at all, it is just the operating system that is no longer operational. If in doubt, follow the "Debrick using U-Boot" instructions here: [Using Uboot to Debrick Your Router :link:](https://docs.gl-inet.com/router/en/4/faq/debrick/)
 
-**Note:** 
+**Note:**
 There can sometimes be problems when debricking with MacOS or Linux. It is best to try it from a Windows computer.
 
 ## Technical problems?

@@ -20,11 +20,11 @@ Der Support hier findet in der Regel von Communitymitgliedern statt. Das sind Be
 
 ### Anleitungen & Tutorials
 
-[für Firmware 4.x :link:](https://docs.gl-inet.com/router/en/4/tutorials/) | [für Firmware 3.x :link:](https://docs.gl-inet.com/router/en/3/tutorials/) 
+[für Firmware 4.x :link:](https://docs.gl-inet.com/router/en/4/tutorials/) | [für Firmware 3.x :link:](https://docs.gl-inet.com/router/en/3/tutorials/)
 
 ### Häufige Probleme & deren Lösungen
 
-[für Firmware 4.x :link:](https://docs.gl-inet.com/router/en/4/faq/) | [für Firmware 3.x :link:](https://docs.gl-inet.com/router/en/3/) 
+[für Firmware 4.x :link:](https://docs.gl-inet.com/router/en/4/faq/) | [für Firmware 3.x :link:](https://docs.gl-inet.com/router/en/3/)
 
 ---
 
@@ -65,7 +65,7 @@ Nichts geht mehr? Das Webinterface ist nicht erreichbar oder Du hast eine falsch
 
 Keine Panik. In den meisten Fällen ist der Router gar nicht kaputt, sondern lediglich das Betriebssystem nicht mehr einsatzfähig. Folge im Zweifelsfall der "Debrick using U-Boot"-Anleitung hier: [Using Uboot to Debrick Your Router :link:](https://docs.gl-inet.com/router/en/4/faq/debrick/)
 
-**Hinweis:** 
+**Hinweis:**
 Es kann manchmal zu Problemen kommen, wenn das Debricking mit MacOS oder Linux durchgeführt wird. Versuche es am besten von einem Windows-Computer aus.
 
 ## Technische Probleme?
@@ -125,6 +125,3 @@ Du kannst alle Log-Dateien direkt über die Web-GUI Deines Routers herunterladen
 Wenn man viel mit der Konfiguration seines Routers spielt, dann kann auch viel schiefgehen. Deshalb ist es manchmal hilfreich, wenn Du alle Einstellungen zurücksetzt und "von vorne" beginnst.
 
 [Reset Firmware Guide :link:](https://docs.gl-inet.com/router/en/4/interface_guide/reset_firmware/)
-
-
-
