@@ -60,4 +60,12 @@ repos:
     rev: 0.13.0
     hooks:
       - id: proselint
-        types: ["asciidoc", "file", "non-executable", "plain-text", "text"]
+        #types: ["asciidoc", "file", "non-executable", "plain-text", "text"]
+        #types: ["asciidoc", "markdown", "file", "non-executable", "text"]
+        types: ["text", "non-executable"]
+        #additional_dependencies: [proselint]
+        exclude: |
+          (?x)^(
+              scripts/update-tailscale/notes_install.adoc|
+              path/to/file\.py
+          )$

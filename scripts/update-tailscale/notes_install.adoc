@@ -1,0 +1,103 @@
+= Benjamin's notes for the tailscale updater script -- Install log
+:hide-uri-scheme:
+// Enable keyboard macros
+:experimental:
+:toc:
+:toclevels: 4
+:icons: font
+:note-caption: ℹ️
+:tip-caption: 💡
+:warning-caption: ⚠️
+:caution-caption: 🔥
+:important-caption: ❗
+
+=== First install log
+
+Here is the output from my first installation with the unmodified script:
+
+[%collapsible]
+====
+
+[source]
+----
+root@GL-AXT1800:~#  ./update-tailscale.sh --ignore-free-space
+┌────────────────────────────────────────────────────────────────────────┐
+│ GL.iNet router script by Admon 🦭 for the GL.iNet community            │
+├────────────────────────────────────────────────────────────────────────┤
+│ WARNING: THIS SCRIPT MIGHT POTENTIALLY HARM YOUR ROUTER!               │
+│ It's only recommended to use this script if you know what you're doing.│
+├────────────────────────────────────────────────────────────────────────┤
+│ This script will update Tailscale on your router.                      │
+│                                                                        │
+│ Prerequisites:                                                         │
+│ 1. At least 130 MB of free space.                                      │
+│ 2. Firmware version 4 or higher.                                       │
+│ 3. Architecture arm64, armv7 or mips.                                  │
+└────────────────────────────────────────────────────────────────────────┘
+┌────────────────────────────────────────────────────────────────────────┐
+│ P R E F L I G H T   C H E C K                                          │
+└────────────────────────────────────────────────────────────────────────┘
+Checking if prerequisites are met ...
+✓ Firmware version: 4
+✓ Architecture: armv7
+x ERROR: Not enough space available. Please free up some space and try again.
+The script needs at least 130 MB of free space. Available space: 51 MB
+If you want to continue, you can use --ignore-free-space to ignore this check.
+WARNING: --ignore-free-space flag is used. Continuing without enough space ...
+Current available space: 51 MB
+✓ Prerequisites are met.
+Do you want to continue? (y/N)
+y
+┌────────────────────────────────────────────────────────────────────────┐
+│ WARNING: --ignore-free-space flag is used. This might potentially harm │
+│ your router. Use it at your own risk.                                  │
+│ You might need to reset your router to factory settings if something   │
+│ goes wrong.                                                            │
+└────────────────────────────────────────────────────────────────────────┘
+Are you sure you want to continue? (y/N)
+y
+Ok, continuing ...
+┌────────────────────────────────────────────────────────────────────────┐
+│ G E T T I N G   N E W E S T   T A I L S C A L E   V E R S I O N        │
+└────────────────────────────────────────────────────────────────────────┘
+Detecting latest tailscale version ...
+The latest tailscale version is: tailscale_1.62.0_arm.tgz
+Downloading latest tailscale version ...
+Extracting tailscale ...
+┌────────────────────────────────────────────────────────────────────────┐
+│ C R E A T I N G   B A C K U P   O F   T A I L S C A L E                │
+└────────────────────────────────────────────────────────────────────────┘
+Skipping backup of tailscale due to --ignore-free-space flag ...
+┌────────────────────────────────────────────────────────────────────────┐
+│ I N S T A L L I N G   T A I L S C A L E                                │
+└────────────────────────────────────────────────────────────────────────┘
+Stopping tailscale ...
+Moving tailscale to /usr/sbin ...
+Removing temporary files ...
+Restarting tailscale ...
+┌────────────────────────────────────────────────────────────────────────┐
+│ U P G R A D E   P E R S I S T A N C E                                  │
+└────────────────────────────────────────────────────────────────────────┘
+The update was successful. Do you want to make the installation permanent?
+This will make your tailscale installation persistent over firmware upgrades.
+Please note that this is not officially supported by GL.iNet.
+It could lead to issues, even if not likely. Just keep that in mind.
+In worst case, you might need to remove the config from /etc/sysupgrade.conf
+Do you want to make the installation permanent? (y/N)
+y
+Making installation permanent ...
+Modifying /etc/sysupgrade.conf ...
+┌────────────────────────────────────────────────────────────────────────┐
+│ S C R I P T   F I N I S H E D   S U C C E S S F U L L Y                │
+└────────────────────────────────────────────────────────────────────────┘
+Script finished successfully. The new tailscale version (software, daemon) is:
+1.62.0
+  tailscale commit: df4d4ebd41b6670c8ca371e5e32ea29e00e69708
+  other commit: d0454003c8cf8ef88763d53716cb0bb6728222f6
+  go version: go1.22.1
+1.62.0
+  tailscale commit: df4d4ebd41b6670c8ca371e5e32ea29e00e69708
+  other commit: d0454003c8cf8ef88763d53716cb0bb6728222f6
+  go version: go1.22.1
+----
+====
