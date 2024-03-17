@@ -13,6 +13,84 @@
 
 == TODO
 
+=== How to retrieve the full path to the script being run at runtime?
+
+`readlink -f $0`
+
+=== Abort if no new version found
+
+[source,bash]
+----
+    # This is the less elegant solution for now
+    TAILSCALE_VERSION_OLD="tailscale_$(tailscale --version | head -1)_${UPX_ARCH}.tgz"
+
+    if [ "$TAILSCALE_VERSION_NEW" == "$TAILSCALE_VERSION_OLD" ]; then
+        echo "You already have the latest version."
+        exit
+    fi
+----
+
+=== `/etc/rc.local`
+
+* In my setup with Internet via WiFi repeater it would not work, so I added 1
+  minute, one could add more if its not desired to have it update so early
+
+[source,bash]
+----
+sleep 1m && yes | /root/update-tailscale.sh --ignore-free-space > /root/ts_update
+----
+
+=== Simplify downloading
+
+[source,bash]
+----
+    if [ "$ARCH" = "aarch64" ]; then
+        TAILSCALE_VERSION_NEW=$(curl -s https://pkgs.tailscale.com/stable/ | grep -o 'tailscale_[0-9]*\.[0-9]*\.[0-9]*_arm64\.tgz' | head -n 1)
+...
+    # show example from helm
+    # https://github.com/helm/helm/blob/976ed8c0be5c34b77380ded25123cf4dab678da7/scripts/get#L27
+    if [ "$ARCH" = "aarch64" ]; then
+        UPX_ARCH="arm64"
+        TS_ARCH="arm64"
+    elif [ "$ARCH" = "armv7l" ]; then
+        UPX_ARCH="arm"
+        TS_ARCH="arm"
+    elif [ "$ARCH" = "mips" ]; then
+        UPX_ARCH="$ARCH"
+        TS_ARCH="$ARCH"
+    fi
+
+    TAILSCALE_VERSION_NEW=$(curl -s https://pkgs.tailscale.com/stable/ | grep -o 'tailscale_[0-9]*\.[0-9]*\.[0-9]*_${TS_ARCH}\.tgz' | head -n 1)
+----
+
+=== Suggest using a function for color printing
+
+* This will also be benefical for monochrome output
+* checking the saved output with tail and cat can be used, BusyBox' `less`
+  however has no `-r` or `-R` option and the output will be harder to read
+
+[source,bash]
+----
+#!/bin/sh
+# shellcheck shell=dash
+
+echo_green() {
+  #echo >&2 -e "\033[32m$*\033[0m"
+  echo -e "\033[32m$*\033[0m"
+}
+
+invoke_outro2() {
+
+    echo_green \
+"┌────────────────────────────────────────────────────────────────────────┐\n"\
+"│ S C R I P T   F I N I S H E D   S U C C E S S F U L L Y                │\n"\
+"└────────────────────────────────────────────────────────────────────────┘"
+    echo "Script finished successfully. The new tailscale version (software, daemon) is:"
+}
+
+invoke_outro2
+----
+
 === UPX compressed build of gum?
 
 * File issue: Create a build for mips? (like for some routers)
@@ -49,6 +127,7 @@ way.
 **** ❌ Consider always checking and ugrading the tailscale version after boot in
      addition to a daily cron job. -- `@reboot` Does not work, see:
      https://openwrt.org/docs/guide-user/base-system/cron#task_specification
+**** Use `/etc/rc.local` to execute commands on boot
 **** Configure a cron job that checks every 3 hours against the GitHub API for
      a new version of Tailscale. Beware of GitHub API rate limiting (60/h).
      Favor using an API over scraping a website. Abort the check early (no new
@@ -151,11 +230,11 @@ external storage is not an option for me.
 
 [source,bash]
 ----
-root@GL-AXT1800:/tmp#  ll -Shr /usr/sbin/tailscale*
+root@GL-AXT1800:~#  ll -Shr /usr/sbin/tailscale*
 -rwxr-xr-x    1 root     root        6.8M Mar 13 16:19 /usr/sbin/tailscale*
 -rwxr-xr-x    1 root     root       12.3M Mar 13 16:19 /usr/sbin/tailscaled*
 
-root@GL-AXT1800:/tmp#  ll -Shr /rom/usr/sbin/ | tail -n5
+root@GL-AXT1800:~#  ll -Shr /rom/usr/sbin/ | tail -n5
 -rwxr-xr-x    1 root     root        1.3M Jan 23 13:33 wpad*
 -rwxr-xr-x    1 root     root        2.8M Jan 23 13:33 tor*
 -rwxr-xr-x    1 root     root        8.2M Jan 23 13:33 dnscrypt-proxy*
@@ -168,6 +247,13 @@ root@GL-AXT1800:/tmp# ./upx -t /rom/usr/sbin/tailscale
 UPX 4.2.2       Markus Oberhumer, Laszlo Molnar & John Reiser    Jan 3rd 2024
 
 upx: /rom/usr/sbin/tailscale: NotPackedException: not packed by UPX
+
+root@GL-AXT1800:~#  /rom/usr/sbin/tailscale --version
+1.32.2-dev
+  go version: go1.19.3
+
+root@GL-AXT1800:~#  /etc/AdGuardHome/AdGuardHome --version
+AdGuard Home, version v0.107.26
 ----
 
 ==== Can the file size be decreased further?
